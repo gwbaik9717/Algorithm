@@ -23,6 +23,8 @@ while q:
             print(cc)
             break
         else:
+            # 이렇게 하면 최소 거리를 보장하지 못한다.
+            # 따라서 이렇게 풀면 안된다.
             if cd // 2 == ed // 2:
                 print(cc + 2)
                 break
