@@ -3,6 +3,7 @@ from itertools import combinations
 from collections import deque
 
 a, b, c = map(int, sys.stdin.readline().strip().split())
+sum = a + b + c
 visited = [[0] * 2000 for _ in range(2000)]
 
 q = deque()
@@ -25,25 +26,19 @@ while q:
     for combi in combis:
         listed = list(combi)
         listed.sort()
-        
-        # leave last one
-        candidates = [ca, cb, cc]
-        for x in listed:
-            candidates.remove(x)
 
         [x, y] = listed
 
-        # add last one 
         if x < y: 
             nx = x * 2
             ny = y - x
-            nz = candidates[-1]
+            nz = sum - (nx + ny)
 
             nc = [nx, ny, nz]
             nc.sort()
 
-            if visited[nx][ny] == 0:
-                visited[nx][ny] = 1
+            if visited[nc[0]][nc[1]] == 0:
+                visited[nc[0]][nc[1]] = 1
                 q.append(nc)
 else:
     print(0)
