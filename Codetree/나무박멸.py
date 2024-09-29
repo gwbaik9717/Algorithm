@@ -124,5 +124,6 @@ for _ in range(m):
     grow()
     reproduce()
     ans += kill()
+    print(graph)
 
 print(ans)
