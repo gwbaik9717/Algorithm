@@ -1,33 +1,28 @@
 function solution(scores) {
+  let answer = 0;
   const wanho = scores[0];
-  const sortedScores = scores.slice(1);
-  sortedScores.sort((a, b) => b[0] + b[1] - (a[0] + a[1]));
+  const sortedScores = scores.slice();
+  sortedScores.sort((a, b) => (a[0] === b[0] ? a[1] - b[1] : b[0] - a[0]));
 
-  const candidates = [];
+  let maxValue = Number.MIN_SAFE_INTEGER;
 
   for (let i = 0; i < sortedScores.length; i++) {
     const score = sortedScores[i];
 
-    if (score[0] > wanho[0] && score[1] > wanho[1]) {
-      return -1;
-    }
+    if (score[1] >= maxValue) {
+      maxValue = score[1];
 
-    if (score[0] + score[1] <= wanho[0] + wanho[1]) {
-      break;
-    }
-
-    let found = false;
-    for (const candidate of candidates) {
-      if (score[0] < candidate[0] && score[1] < candidate[1]) {
-        found = true;
-        break;
+      if (score[0] + score[1] > wanho[0] + wanho[1]) {
+        answer++;
       }
+
+      continue;
     }
 
-    if (!found) {
-      candidates.push(score);
+    if (wanho[0] === score[0] && wanho[1] === score[1]) {
+      return -1;
     }
   }
 
-  return candidates.length + 1;
+  return answer + 1;
 }
