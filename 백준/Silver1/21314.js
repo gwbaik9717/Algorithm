@@ -1,4 +1,5 @@
-// Time Complexity: O(n)
+// Time Complexity: O(n), 반례못찾음
+
 const sample = "MMM";
 const fs = require("fs");
 const inputs = sample.toString().trim().split("\n");
