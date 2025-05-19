@@ -1,5 +1,5 @@
 // TC: O(n + m)
-// SC: O(m)
+// SC: O(1)
 
 /**
  * @param {number[]} nums1
@@ -9,22 +9,24 @@
  * @return {void} Do not return anything, modify nums1 in-place instead.
  */
 var merge = function (nums1, m, nums2, n) {
+
   if (n === 0) {
-    return;
+    return
   }
 
-  const cloned = nums1.slice(0, m);
+  let i = m - 1;
+  let j = n - 1;
+  let k = m + n - 1
 
-  let i = 0;
-  let j = 0;
-
-  for (let k = 0; k < m + n; k++) {
-    if (j >= n || cloned[i] < nums2[j]) {
-      nums1[k] = cloned[i];
-      i++;
+  while (k >= 0) {
+    if (i < 0 || nums1[i] < nums2[j]) {
+      nums1[k] = nums2[j]
+      j--
     } else {
-      nums1[k] = nums2[j];
-      j++;
+      nums1[k] = nums1[i]
+      i--
     }
+
+    k--
   }
 };
